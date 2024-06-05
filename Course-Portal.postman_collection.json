@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "3d507379-a6cb-4cf1-b47c-a9d93166a2b4",
+		"name": "Course-Portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30355300"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'http://localhost:8000/sanctum/csrf-cookie',\r",
+									"    method: 'GET'\r",
+									"}, function (error, response, {cookies}) {\r",
+									"    if (!error){\r",
+									"        pm.collectionVariables.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}login?email=alisalah996.as@gmail.com&password=123456",
+							"host": [
+								"{{local}}login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "alisalah996.as@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "127.0.0.1:8000",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}api/user",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscription",
+			"item": [
+				{
+					"name": "subscribe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "127.0.0.1:8000",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"course_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}api/subscribe",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}api/allLessons/1",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"allLessons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Lesson",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "127.0.0.1:8000",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}api/showLesson/1",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"showLesson",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Watch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "127.0.0.1:8000",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lesson_id\" : 25,\r\n    \"status\" : \"done\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}api/ConfirmWatch",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"ConfirmWatch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Store Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "127.0.0.1:8000",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lesson_id\" : 5,\r\n    \"comments\" :\"very helpful lesson\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}api/commentStore",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"commentStore"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Achievements",
+			"item": [
+				{
+					"name": "user Achievements",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}api/users/1/achievements",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"users",
+								"1",
+								"achievements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://127.0.0.1:8000/",
+			"type": "string"
+		},
+		{
+			"key": "xsrf-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "xsrf-cookie",
+			"value": ""
+		}
+	]
+}

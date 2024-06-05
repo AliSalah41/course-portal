@@ -30,7 +30,7 @@ class lessonController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "No Lessons added yet.",
-            ]);
+            ],404);
         }
 
         return response()->json([
@@ -48,7 +48,7 @@ class lessonController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Lesson Not Found!.",
-            ]);
+            ],404);
         }
         $userId = Auth::id();
         $courseId = $lesson->course_id;
@@ -59,7 +59,7 @@ class lessonController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "User is not subscribed to this course!.",
-            ]);
+            ],403);
         }
 
         return response()->json([
@@ -83,7 +83,7 @@ class lessonController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Lesson Not Found!.",
-            ]);
+            ],404);
         }
         
         $UserLessonHistory = UserLessonHistory::where('user_id', $user->id)->where('lesson_id', $lesson->id)->first();
@@ -100,7 +100,7 @@ class lessonController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => "user must finish the lesson",
-                ]);
+                ],403);
             }
         }
 
@@ -113,6 +113,6 @@ class lessonController extends Controller
         return response()->json([
             'status' => true,
             'lessons' => "lesson submitted successfully",
-        ]);
+        ],201);
     }
 }

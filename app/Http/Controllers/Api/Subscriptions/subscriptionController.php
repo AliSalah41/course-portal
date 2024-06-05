@@ -25,7 +25,7 @@ class subscriptionController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'course not found',
-            ]);
+            ],404);
         }
 
         Subscription::create([

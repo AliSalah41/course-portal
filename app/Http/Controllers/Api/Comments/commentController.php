@@ -34,7 +34,7 @@ class commentController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Lesson Not Found!.",
-            ]);
+            ],404);
         }
 
         $subscribe = Subscription::where('course_id', $lesson->course_id)->where('user_id', $user->id)->first();
@@ -43,7 +43,7 @@ class commentController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "User is not subscribed to this course!.",
-            ]);
+            ],403);
         }
 
         Comment::create([
@@ -60,6 +60,6 @@ class commentController extends Controller
         return response()->json([
             'status' => true,
             'message' =>"Comment Saved successfully",
-        ]);
+        ],201);
     }
 }
