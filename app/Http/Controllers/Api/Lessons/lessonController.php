@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\lessonResource;
 use App\Models\Lesson;
 use App\Models\Subscription;
+use App\Models\User;
 use App\Models\UserLessonHistory;
 use App\Services\UserCourseActivityService;
 use Illuminate\Http\Request;
@@ -85,23 +86,30 @@ class lessonController extends Controller
             ]);
         }
         
-        if($request->status == "done")
+        $UserLessonHistory = UserLessonHistory::where('user_id', $user->id)->where('lesson_id', $lesson->id)->first();
+        if(!$UserLessonHistory)
         {
-            $history = UserLessonHistory::create([
-                'user_id' => $user->id,
-                'lesson_id' => $lesson->id,
-            ]);
-        } 
-        else {
-            return response()->json([
-                'status' => false,
-                'message' => "user must finish the lesson",
-            ]);
+            if($request->status == "done")
+            {
+                $history = UserLessonHistory::create([
+                    'user_id' => $user->id,
+                    'lesson_id' => $lesson->id,
+                ]);
+            } 
+            else {
+                return response()->json([
+                    'status' => false,
+                    'message' => "user must finish the lesson",
+                ]);
+            }
         }
 
-        $activity = $this->userCourseActivityService->getUserCourseActivity($user->id, $lesson->course_id);
 
-        
+        $activity = $this->userCourseActivityService->getUserActivity($user->id);
+
+        //update AchievementsNumber & Badge
+        $updateAchievementsNumber = $this->userCourseActivityService->updateLessonAchievements($user->id, $activity['lessons_watched']);
+
         return response()->json([
             'status' => true,
             'lessons' => "lesson submitted successfully",

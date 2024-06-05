@@ -52,7 +52,10 @@ class commentController extends Controller
             'comments' => $request->comments
         ]);
 
-        $activity = $this->userCourseActivityService->getUserCourseActivity($user->id, $lesson->course_id);
+        $activity = $this->userCourseActivityService->getUserActivity($user->id);
+
+        //update AchievementsNumber & Badge
+        $updateAchievementsNumber = $this->userCourseActivityService->updateCommentAchievements($user->id, $activity['comments_made']);
 
         return response()->json([
             'status' => true,

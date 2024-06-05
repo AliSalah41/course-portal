@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\NewBadgeNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'badge',
+        'Achievements',
     ];
 
     /**
@@ -56,5 +60,10 @@ class User extends Authenticatable
     public function userHistory()
     {
         return $this->hasMany(UserLessonHistory::class);
+    }
+
+    public function sendEmail()
+    {
+        $this->notify(new NewBadgeNotification);
     }
 }

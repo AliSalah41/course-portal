@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Badges\badgeController;
 use App\Http\Controllers\Api\Comments\commentController;
 use App\Http\Controllers\Api\Lessons\lessonController;
 use App\Http\Controllers\Api\Subscriptions\subscriptionController;
@@ -30,3 +31,4 @@ Route::middleware(['auth:sanctum'])->group(function (){
 });
 
 Route::get('allLessons/{courseId}',[lessonController::class,'index']);
+Route::get('users/{user}/achievements', [badgeController::class, 'getUserAchievements']);

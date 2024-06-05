@@ -12,7 +12,6 @@ class Subscription extends Model
     protected $fillable = [
         'user_id',
         'course_id',
-        'achievement',
     ];
 
     public function user()
