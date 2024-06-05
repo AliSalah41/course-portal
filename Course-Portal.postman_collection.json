@@ -45,18 +45,18 @@
 							}
 						],
 						"url": {
-							"raw": "{{local}}login?email=alisalah996.as@gmail.com&password=123456",
+							"raw": "{{local}}login?email=&password=password",
 							"host": [
 								"{{local}}login"
 							],
 							"query": [
 								{
 									"key": "email",
-									"value": "alisalah996.as@gmail.com"
+									"value": ""
 								},
 								{
 									"key": "password",
-									"value": "123456"
+									"value": "password"
 								}
 							]
 						}
