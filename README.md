@@ -33,6 +33,26 @@ Generate a new application key
 
     php artisan key:generate
 
+Run the database seeder and you're done
+
+    php artisan db:seed
+
+Run the database migrations (**Set the database connection in .env before migrating**)
+
+    php artisan migrate
+
+Start the local development server
+
+    php artisan serve
+
+    You can now access the server at http://127.0.0.1:8000/
+
+## PostMan :
+
+**The postman collection is in the project folder(json_file) you cant import the file in postman and it should work with you.**
+
+<!-- Open the DummyDataSeeder and set the property values as per your requirement -->
+
 
 <!-- ### Premium Partners
 
