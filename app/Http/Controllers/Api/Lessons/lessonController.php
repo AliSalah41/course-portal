@@ -21,7 +21,7 @@ class lessonController extends Controller
         $this->userCourseActivityService = $userCourseActivityService;
     }
 
-    public function index($id)
+    public function index($id): \Illuminate\Http\JsonResponse
     {
         $lessons = Lesson::where('course_id', $id)->get();
 
@@ -85,7 +85,7 @@ class lessonController extends Controller
                 'message' => "Lesson Not Found!.",
             ],404);
         }
-        
+
         $UserLessonHistory = UserLessonHistory::where('user_id', $user->id)->where('lesson_id', $lesson->id)->first();
         if(!$UserLessonHistory)
         {
@@ -95,7 +95,7 @@ class lessonController extends Controller
                     'user_id' => $user->id,
                     'lesson_id' => $lesson->id,
                 ]);
-            } 
+            }
             else {
                 return response()->json([
                     'status' => false,

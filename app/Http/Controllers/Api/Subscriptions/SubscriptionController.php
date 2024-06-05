@@ -8,9 +8,9 @@ use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class subscriptionController extends Controller
+class SubscriptionController extends Controller
 {
-    public function subscribe(Request $request)
+    public function subscribe(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'course_id' => 'required'
@@ -26,6 +26,13 @@ class subscriptionController extends Controller
                 'status' => false,
                 'message' => 'course not found',
             ],404);
+        }
+        if (Subscription::where('user_id', $user->id)->where('course_id', $course->id)->exists())
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'You are already subscribed to this course',
+            ],400);
         }
 
         Subscription::create([

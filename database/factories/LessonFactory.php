@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,12 +15,14 @@ class LessonFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
-        return [
-            'title' => fake()->sentence(20),
-            'lesson_link' => "https://www.youtube.com/watch?v=1NjOWtQ7S2o&list=PL3VM-unCzF8hy47mt9-chowaHNjfkuEVz",
-            'course_id' => 1
-        ];
+        if ($course = Course::inRandomOrder()->first()) {
+            return [
+                'title' => fake()->sentence(20),
+                'lesson_link' => fake()->url,
+                'course_id' => $course->id,
+            ];
+        }
     }
 }
