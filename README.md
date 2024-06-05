@@ -33,14 +33,14 @@ Generate a new application key
 
     php artisan key:generate
 
-Run the database seeder and you're done
-
-    php artisan db:seed
-
 Run the database migrations (**Set the database connection in .env before migrating**)
 
     php artisan migrate
 
+Run the database seeder and you're done
+
+    php artisan db:seed
+    
 Start the local development server
 
     php artisan serve
