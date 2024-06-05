@@ -40,7 +40,7 @@ Run the database migrations (**Set the database connection in .env before migrat
 Run the database seeder and you're done
 
     php artisan db:seed
-    
+
 Start the local development server
 
     php artisan serve
@@ -49,7 +49,7 @@ Start the local development server
 
 ## PostMan :
 
-**The postman collection is in the project folder(json_file) you cant import the file in postman and it should work with you.**
+**The postman collection is in the project folder(json_file) you cant import the file in postman and it should work.**
 
 <!-- Open the DummyDataSeeder and set the property values as per your requirement -->
 
