@@ -47,7 +47,7 @@ Start the local development server
 
     You can now access the server at http://127.0.0.1:8000/
 
-## PostMan :
+## Postman:
 
 **The postman collection is in the project folder(json_file) you cant import the file in postman and it should work.**
 
